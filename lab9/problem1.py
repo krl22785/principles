@@ -135,11 +135,10 @@ def drawPlot(shapeFilename, mapPoints, zipBorough):
     output_file("Problem1.html", title = "NYC by Zip" )
 
     TOOLS="pan,wheel_zoom,box_zoom,reset,previewsave,resize,hover"
-
     patches(polygons['lng_list'], polygons['lat_list'], source=source, \
             fill_color = 'col', line_color='gray', \
-            tools=TOOLS, plot_width = 900, plot_height = 700, \
-            title = 'Zip Codes by Agency Complaint')
+            tools=TOOLS, plot_width = 1100, plot_height = 900, \
+            title = 'Top Agency Complaints per Zip Code')
  
     hover = curplot().select(dict(type=HoverTool))
     hover.tooltips = OrderedDict([
@@ -159,7 +158,7 @@ if __name__ == '__main__':
     if len(sys.argv) != 4:
         print 'Usage:'
         print sys.argv[0] + '1: [complaints] 2: [zip_borough] 3: [shapefile]'
-        print '\ne.g.: ' + sys.argv[0] + ' 311nyc.csv zip_borough.csv shape_data/'
+        print '\ne.g.: ' + sys.argv[0] + ' 311nyc.csv zip_borough.csv shape_data/nyshape.shp'
     else:
         mapPoints = loadZipComplaints(sys.argv[1])
         zipBorough = getZipBorough(sys.argv[2])

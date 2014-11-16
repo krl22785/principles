@@ -118,13 +118,13 @@ def drawPlot(shapeFilename, mapPoints, zipBorough, finalDots):
 	TOOLS="pan,wheel_zoom,box_zoom,reset,previewsave"
 
 	patches(polygons['lng_list'], polygons['lat_list'], \
-            fill_color='#d17d65', line_color='gray', \
-            tools=TOOLS, plot_width = 900, plot_height = 700, \
+            fill_color='#f7d779', line_color='black', \
+            tools=TOOLS, plot_width = 1100, plot_height = 900, \
             title = 'Concetration of 311 Calls by %s Grids' % n)
 	hold()
 
 	scatter(finalDots['lng_list'], finalDots['lat_list'],
-		fill_color='red',color='red', fill_alpha=1.0, line_alpha=0.1, size=finalDots['size'], tools=TOOLS, plot_width=1100, plot_height=700, name="mapPoints")
+		fill_color='red',color='red', fill_alpha=.75, line_alpha=0.1, size=finalDots['size'], tools=TOOLS, plot_width=1100, plot_height=700, name="mapPoints")
 
 	show()
 
