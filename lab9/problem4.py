@@ -78,8 +78,7 @@ def drawPlot(shapeFilename, mapPoints, zipBorough):
 
 		record_index += 1
 
-
-	output_file("q4.html", title="shape and points example")
+	output_file("Problem4.html", title="shape and points example")
 	TOOLS="pan,wheel_zoom,box_zoom,reset,previewsave"
 
 	patches(polygons['lng_list'], polygons['lat_list'], \
@@ -93,13 +92,10 @@ def drawPlot(shapeFilename, mapPoints, zipBorough):
 
 	show()
 
-
-
-
 if __name__ == '__main__':
     if len(sys.argv) != 4:
         print 'Usage:'
-        print sys.argv[0] + 'n [complaintsfile] [zipboroughfile] [shapefile]'
+        print sys.argv[0] + '1. [complaintsfile] 2. [zipboroughfile] 3. [shapefile]'
         print '\ne.g.: ' + sys.argv[0] + ' 311nyc.csv zip_borough.csv shape_data/ NYPD DOT'
     else:
     	mapPoints = loadZipComplaints(sys.argv[1])

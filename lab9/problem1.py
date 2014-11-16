@@ -14,6 +14,7 @@ def loadZipComplaints(ComplaintFile):
     filename =  open(ComplaintFile)
     reader = csv.reader(filename, delimiter = ',')
     headers = reader.next()
+
     zipIndex = headers.index('Incident Zip')
     latColIndex = headers.index('Latitude')
     lngColIndex = headers.index('Longitude')
@@ -23,7 +24,6 @@ def loadZipComplaints(ComplaintFile):
     lng = []
 
     agencyDict = {}
-    colors = []
     complaintsperzip = {}
 
 
@@ -132,7 +132,7 @@ def drawPlot(shapeFilename, mapPoints, zipBorough):
         )
     )
 
-    output_file("shapeAndPoints_test1.html", title = "NYC by Zip" )
+    output_file("Problem1.html", title = "NYC by Zip" )
 
     TOOLS="pan,wheel_zoom,box_zoom,reset,previewsave,resize,hover"
 

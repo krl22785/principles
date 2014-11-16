@@ -19,8 +19,8 @@ def loadZipComplaints(ComplaintFile):
 	lngColIndex = headers.index('Longitude')
 	agencyIndex = headers.index('Agency')
 
-	lat = []
-	lng = []
+	#lat = []
+	#lng = []
 
 	complaintsbyzip = {}
 	twoZip = [agency_one, agency_two] #use to select only two zips 
@@ -30,8 +30,8 @@ def loadZipComplaints(ComplaintFile):
 
 		if agency in twoZip:
 			try:
-				lat.append(float(row[latColIndex]))
-				lng.append(float(row[lngColIndex]))
+				#lat.append(float(row[latColIndex]))
+				#lng.append(float(row[lngColIndex]))
 				zipcode = row[zipIndex]
 
 				if zipcode in complaintsbyzip:
@@ -106,13 +106,13 @@ def drawPlot(shapeFilename, mapPoints, zipBorough):
 				
 		record_index += 1	
 
-	output_file("shapeAndPoints_test1.html", title = "NYC by Zip" )
-	TOOLS="pan,wheel_zoom,box_zoom,reset,previewsave,resize,hover"
+	output_file("Problem2.html", title = "NYC by Zip" )
+	TOOLS="pan,wheel_zoom,box_zoom,reset,previewsave,resize"
 
 	patches(polygons['lng_list'], polygons['lat_list'], \
             fill_color=polygons['color_list'], line_color='gray', \
             tools=TOOLS, plot_width = 900, plot_height = 700, \
-            title = 'Color Code Agency')
+            title = '%s vs %s Across Zip Codes' % (agency_one, agency_two))
 
 	hold()
 
@@ -120,15 +120,15 @@ def drawPlot(shapeFilename, mapPoints, zipBorough):
 	for i, area in enumerate(colorscale):
 		if i == 0: 
 			rect([x], [y], color=colorscale[i], width=0.025, height=.025)
-			text([x], [y], text=agency_one, angle=0, text_font_size="6pt", text_align="center", text_baseline="middle")
+			text([x], [y], text=agency_one, angle=0, text_font_size="8pt", text_align="center", text_baseline="middle", text_color = "white")
 			y = y + .025
 		elif i == (len(colorscale) - 1):
 			rect([x], [y], color=colorscale[i], width=0.025, height=.025)
-			text([x], [y], text=agency_two, angle=0, text_font_size="6pt", text_align="center", text_baseline="middle")
+			text([x], [y], text=agency_two, angle=0, text_font_size="8pt", text_align="center", text_baseline="middle", text_color = "black")
 			y = y + .025
 		else:
 			rect([x], [y], color=colorscale[i], width=0.025, height=.025)
-			text([x], [y], text="" , angle=0, text_font_size="6pt", text_align="center", text_baseline="middle")
+			text([x], [y], text="" , angle=0, text_font_size="8pt", text_align="center", text_baseline="middle")
 			y = y + .025
 	show()
 
@@ -136,7 +136,7 @@ def drawPlot(shapeFilename, mapPoints, zipBorough):
 if __name__ == '__main__':
     if len(sys.argv) != 6:
         print 'Usage:'
-        print sys.argv[0] + '1. 311nyc.csv 2. zip_borough.csv 3. shape_data/nyshape.shp 4. agency one 5. agency two'
+        print sys.argv[0] + '1. [complaints] 2. [zip_borough] 3. [shapefile] 4. [agency 1] 5. [agency 2]'
         print '\ne.g.: ' + sys.argv[0] + ' 311nyc.csv zip_borough.csv shape_data/ NYPD DOT'
     else:
     	agency_one = str(sys.argv[4])

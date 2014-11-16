@@ -18,10 +18,6 @@ def loadZipComplaints(ComplaintFile):
 
 	headers = reader.next()
 
-	#METHODOLOGY TO BUCKETING 
-	#x - minx / (wdiff/n)
-	#y - minx / (hdiff/n)
-
 	x0 = -74.30
 	x1 = -73.60
 	y0 = 40.40 
@@ -49,7 +45,7 @@ def loadZipComplaints(ComplaintFile):
 		except:
 			pass 
 
-	return {'lat_list': lat, 'lng_list': lng, 'index': zip(yindex, xindex)} # 'y_index': yindex, 'x_index': xindex}
+	return {'lat_list': lat, 'lng_list': lng, 'index': zip(yindex, xindex)} 
 
 def getZipBorough(zipBoroughFilename):
 
@@ -60,7 +56,7 @@ def getZipBorough(zipBoroughFilename):
 	return {row[0]: row[1] for row in reader}
 
 
-def getDots(mapPoints): #, x0, y1, x1, y1):
+def getDots(mapPoints): 
 	x0 = -74.30
 	x1 = -73.60
 	y0 = 40.40 
@@ -90,7 +86,6 @@ def getDots(mapPoints): #, x0, y1, x1, y1):
 		x1 = x + ((xdiff/n)/2.00)
 
 		size1 = math.log(v, 2) #(v/float(total)) * 200.00
-		#math.log()
 
 		lat1.append(y1)
 		lng1.append(x1)
@@ -100,7 +95,6 @@ def getDots(mapPoints): #, x0, y1, x1, y1):
 
 
 def drawPlot(shapeFilename, mapPoints, zipBorough, finalDots):
-	#print finalDots['size']
 	
 	dat = shapefile.Reader(shapeFilename)
 	polygons = {'lat_list': [], 'lng_list': []}
@@ -120,15 +114,13 @@ def drawPlot(shapeFilename, mapPoints, zipBorough, finalDots):
 
 		record_index += 1
 
-
-	output_file("q3.html", title="shape and points example")
+	output_file("Problem3.html", title="shape and points example")
 	TOOLS="pan,wheel_zoom,box_zoom,reset,previewsave"
 
 	patches(polygons['lng_list'], polygons['lat_list'], \
             fill_color='#d17d65', line_color='gray', \
             tools=TOOLS, plot_width = 900, plot_height = 700, \
-            title = 'Concetration of 311 Calls')
-
+            title = 'Concetration of 311 Calls by %s Grids' % n)
 	hold()
 
 	scatter(finalDots['lng_list'], finalDots['lat_list'],
@@ -136,11 +128,10 @@ def drawPlot(shapeFilename, mapPoints, zipBorough, finalDots):
 
 	show()
 
-
 if __name__ == '__main__':
     if len(sys.argv) != 5:
         print 'Usage:'
-        print sys.argv[0] + 'n [complaintsfile] [zipboroughfile] [shapefile]'
+        print sys.argv[0] + '1. [n] 2. [complaintsfile] 3. [zipboroughfile] 4. [shapefile]'
         print '\ne.g.: ' + sys.argv[0] + ' 311nyc.csv zip_borough.csv shape_data/ NYPD DOT'
     else:
     	n = int(sys.argv[1])
